@@ -1,7 +1,7 @@
 package pu.csic.loginapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +24,14 @@ public class MainActivity extends AppCompatActivity {
                 EditText pw = findViewById(R.id.paName);
 
                 if(name.getText().toString().equals("john")&&pw.getText().toString().equals("pw")){
+                    Bundle data = new Bundle();
+                    data.putString("account", name.getText().toString());
+                    data.putInt("age",24);
+
                     Intent it = new Intent(getApplicationContext(),UserActivity.class);
-                    startActivity(it);
+                    it.putExtras(data);
+
+                    startActivityForResult(it,100);
                     Toast.makeText(getApplicationContext(),"成功",Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -33,5 +39,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if( requestCode == 100){
+            if ( resultCode==1000){
+                Bundle da=data.getExtras();
+                String val=da.getString("key");
+                Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
+            }
+
+        }
+
     }
 }
