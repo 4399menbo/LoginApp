@@ -1,9 +1,13 @@
 package pu.csic.loginapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,5 +57,26 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.id1:
+                new AlertDialog.Builder(this).setTitle("item1").setMessage("for set").create().show();
+                Toast.makeText(getApplicationContext(),"select Item1",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.id2:
+                Toast.makeText(getApplicationContext(),"select Item2",Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
